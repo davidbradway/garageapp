@@ -1,0 +1,67 @@
+    <h1>The garage is currently (state)</h1>
+
+    <p id="description">Click the button to schedule a door opening.</p>
+
+<!-- role="button"  -->
+    <p><a href="#" class="btn btn-default btn-lg btn-block" onclick="getLocation()">Find &raquo; <br/>
+      Open on connect!</a></p>
+
+ <!--    <div class="well"></div> -->
+    <div class="center-block" id="mapholder"></div>
+
+    <script>
+      var x=document.getElementById("description");
+      function getLocation()
+        {
+        if (navigator.geolocation)
+          {
+          //navigator.geolocation.getCurrentPosition(showPosition,showError);
+          navigator.geolocation.watchPosition(showPosition,showError);
+          }
+        else{x.innerHTML="Geolocation is not supported by this browser.";}
+        }
+      function showPosition(position)
+        {
+        // x.innerHTML="Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude;  
+        x.innerHTML="<table><tr><td><strong>Latitude:</strong></td><td>"+position.coords.latitude+"</td></tr><tr><td><strong>Longitude:</strong></td><td>"+position.coords.longitude+"</td></tr></table>";
+
+        var map_canvas = document.getElementById('mapholder');
+
+        var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+        var map_options = {
+          center: myLatlng,
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(map_canvas, map_options)
+
+        // To add the marker to the map, use the 'map' property
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title:"You are here!"
+        });
+        }
+      function showError(error)
+        {
+        switch(error.code) 
+          {
+          case error.PERMISSION_DENIED:
+            x.innerHTML="User denied the request for Geolocation."
+            break;
+          case error.POSITION_UNAVAILABLE:
+            x.innerHTML="Location information is unavailable."
+            break;
+          case error.TIMEOUT:
+            x.innerHTML="The request to get user location timed out."
+            break;
+          case error.UNKNOWN_ERROR:
+            x.innerHTML="An unknown error occurred."
+            break;
+          }
+        }
+    </script>
+
+    <%= render 'form' %>
+    <%= link_to 'Back', openings_path %>

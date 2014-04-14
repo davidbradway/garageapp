@@ -1,0 +1,10 @@
+{
+	"folders":
+	[
+		{
+			"path": "/home/bradway/Downloads/garageappruby/garageapp",
+            "folder_exclude_patterns": ["bin", "db", "lib", "log", "test", "tmp", "vendor"],
+            "file_exclude_patterns": ["Gemfile*", ".git*", "Rake*", "config*", "*.sublime*"]
+		}
+	]
+}

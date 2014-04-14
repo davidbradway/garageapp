@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @opening.user_id %>
+</p>
+
+<p>
+  <strong>Lat:</strong>
+  <%= @opening.Lat %>
+</p>
+
+<p>
+  <strong>Long:</strong>
+  <%= @opening.Long %>
+</p>
+
+<p>
+  <strong>Requested:</strong>
+  <%= @opening.Requested %>
+</p>
+
+<p>
+  <strong>Completed:</strong>
+  <%= @opening.Completed %>
+</p>
+
+<%= link_to 'Edit', edit_opening_path(@opening) %> |
+<%= link_to 'Back', openings_path %>
